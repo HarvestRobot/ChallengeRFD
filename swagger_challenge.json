@@ -1,0 +1,218 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "API para controlar la ubicación de los vehículos de una empresa de reparto, así como sus pedidos asociados.",
+    "version": "1.0.0",
+    "title": "ChallengeRFD",
+    "contact": {
+      "email": "luciapiedrabuena1@gmail.com"
+    }
+  },
+  "host": "virtserver.swaggerhub.com",
+  "basePath": "/HarvestRobot/ChallengeRFD/1.0.0",
+  "tags": [
+    {
+      "name": "ubicacion",
+      "description": "Llamadas para obtener, insertar o actualizar la ubicación del vehículo que lleva el pedido"
+    },
+    {
+      "name": "pedidos",
+      "description": "Llamadas para añadir o borrar pedidos"
+    }
+  ],
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/ubicacion": {
+      "get": {
+        "tags": [
+          "ubicacion"
+        ],
+        "summary": "obtener ubicación y vehículo",
+        "description": "Obtiene los datos del vehículo que lleva el pedido",
+        "operationId": "getUbicacion",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "idPedido",
+            "in": "query",
+            "description": "el id del pedido del que se quiere obtener la ubicación",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/datoscoche"
+              }
+            }
+          },
+          "400": {
+            "description": "400 bad request"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "ubicacion"
+        ],
+        "summary": "actualizar ubicación",
+        "description": "Actualiza la ubicación del vehículo",
+        "operationId": "postUbicacion",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "datosPedido",
+            "description": "Los datos del pedido que se quieren actualizar",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/datoscoche"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "item created"
+          },
+          "400": {
+            "description": "bad request"
+          }
+        }
+      }
+    },
+    "/pedidos": {
+      "post": {
+        "tags": [
+          "pedidos"
+        ],
+        "summary": "añadir nuevo pedido",
+        "description": "Asigna un pedido nuevo a un coche",
+        "operationId": "postPedido",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "datosPedido",
+            "description": "Los datos del pedido que se quiere crear",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/pedido"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "item created"
+          },
+          "400": {
+            "description": "bad request"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "pedidos"
+        ],
+        "summary": "borrar pedido",
+        "description": "Borra (o desasigna) un pedido de un coche",
+        "operationId": "deletePedido",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "idPedido",
+            "in": "query",
+            "description": "los datos del pedido que se quiere borrar",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "item created"
+          },
+          "400": {
+            "description": "bad request"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "datoscoche": {
+      "type": "object",
+      "required": [
+        "idPedido",
+        "ubicacion"
+      ],
+      "properties": {
+        "idPedido": {
+          "type": "string",
+          "format": "string",
+          "example": "164783456"
+        },
+        "idCoche": {
+          "type": "string",
+          "format": "string",
+          "example": "CR2564"
+        },
+        "ubicacion": {
+          "type": "string",
+          "format": "string",
+          "example": "Madrid"
+        },
+        "latitud": {
+          "type": "string",
+          "example": "40.48725603806988"
+        },
+        "longitud": {
+          "type": "string",
+          "example": "-3.6789361594249685"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2016-08-29T09:12:33.001Z"
+        }
+      }
+    },
+    "pedido": {
+      "type": "object",
+      "required": [
+        "idCoche",
+        "idPedido"
+      ],
+      "properties": {
+        "idPedido": {
+          "type": "string",
+          "format": "string",
+          "example": "164783456"
+        },
+        "idCoche": {
+          "type": "string",
+          "format": "string",
+          "example": "CR2564"
+        }
+      }
+    }
+  }
+}
