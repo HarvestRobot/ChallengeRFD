@@ -8,9 +8,9 @@ public class DatosCoche {
     private final String ubicacion;
     private final String latitud;
     private final String longitud;
-    private final Date timestamp;
+    private final String timestamp;
 
-    public DatosCoche(int idPedido, String idCoche, String ubicacion, String latitud, String longitud, Date timestamp) {
+    public DatosCoche(int idPedido, String idCoche, String ubicacion, String latitud, String longitud, String timestamp) {
         this.idPedido = idPedido;
         this.idCoche = idCoche;
         this.ubicacion = ubicacion;
@@ -39,7 +39,7 @@ public class DatosCoche {
         return longitud;
     }
 
-    public Date getTimestamp() {
+    public String getTimestamp() {
         return timestamp;
     }
 }
