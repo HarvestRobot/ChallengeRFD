@@ -8,8 +8,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-@Table (name = "localizaciones")
-public class DatosPedido {
+@Table (name = "packagedata")
+public class PackageData {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idPedido;
@@ -19,7 +19,7 @@ public class DatosPedido {
     private String longitud;
     private String timestamp;
 
-    protected DatosPedido(){
+    protected PackageData(){
 
     }
     /*public DatosPedido(int idPedido, String idCoche, String ubicacion, String latitud, String longitud, String timestamp) {

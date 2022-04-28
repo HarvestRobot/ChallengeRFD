@@ -1,7 +1,7 @@
 package com.challengeRFD.api;
 
-import com.challengeRFD.model.DatosPedido;
-import com.challengeRFD.model.Pedido;
+import com.challengeRFD.model.PackageData;
+import com.challengeRFD.model.PackageAssignments;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
@@ -14,7 +14,7 @@ public interface ChallengeAPI {
     @ApiOperation(value = "Obtiene la localizacion de un pedido.", nickname = "getUbicacion", tags = {
             "ubicacion" }, produces = "application/json")
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Resource obtained successfully", response = DatosPedido.class),
+            @ApiResponse(code = 200, message = "Resource obtained successfully", response = PackageData.class),
             @ApiResponse(code = 202, message = "Accepted"),
             @ApiResponse(code = 400, message = "Bad request or functional error"),
             @ApiResponse(code = 401, message = "Unauthorized"),
@@ -29,7 +29,7 @@ public interface ChallengeAPI {
     @ApiOperation(value = "Actualiza la localizacion de un pedido.", nickname = "postUbicacion", tags = {
             "ubicacion" }, produces = "application/json", consumes = "application/json")
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Resource created successfully", response = DatosPedido.class),
+            @ApiResponse(code = 200, message = "Resource created successfully", response = PackageData.class),
             @ApiResponse(code = 202, message = "Accepted"),
             @ApiResponse(code = 400, message = "Bad request or functional error"),
             @ApiResponse(code = 401, message = "Unauthorized"),
@@ -38,12 +38,12 @@ public interface ChallengeAPI {
             @ApiResponse(code = 500, message = "Internal Server Error") })
     @RequestMapping(value = "/ubicacion", produces = {
             "application/json" }, consumes = { "application/json" }, method = RequestMethod.POST)
-    ResponseEntity<?> postUbicacion(@RequestBody DatosPedido datosPedido);
+    ResponseEntity<?> postUbicacion(@RequestBody PackageData packageData);
 
     @ApiOperation(value = "Asigna un pedido a un vehiculo.", nickname = "postPedido", tags = {
             "pedido" }, produces = "application/json", consumes = "application/json")
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Resource created successfully", response = Pedido.class),
+            @ApiResponse(code = 200, message = "Resource created successfully", response = PackageAssignments.class),
             @ApiResponse(code = 202, message = "Accepted"),
             @ApiResponse(code = 400, message = "Bad request or functional error"),
             @ApiResponse(code = 401, message = "Unauthorized"),
@@ -52,7 +52,7 @@ public interface ChallengeAPI {
             @ApiResponse(code = 500, message = "Internal Server Error") })
     @RequestMapping(value = "/pedido", produces = {
             "application/json" }, consumes = { "application/json" }, method = RequestMethod.POST)
-    ResponseEntity<?> postPedido(@RequestBody Pedido pedido);
+    ResponseEntity<?> postPedido(@RequestBody PackageAssignments packageAssignments);
 
 
     @ApiOperation(value = "Borra todos los datos de un pedido ya entregado.", nickname = "deletePedido", tags = {

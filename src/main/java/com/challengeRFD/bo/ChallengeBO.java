@@ -1,17 +1,13 @@
 package com.challengeRFD.bo;
 
 import com.challengeRFD.database.DatosPedidoRepository;
-import com.challengeRFD.model.DatosPedido;
+import com.challengeRFD.model.PackageData;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.Properties;
+
 @Service("ChallengeBO")
 public class ChallengeBO {
 
@@ -22,8 +18,8 @@ public class ChallengeBO {
 
     }
 
-    public ArrayList<DatosPedido> getUbicacion (int idPedido) throws SQLException {
-        ArrayList<DatosPedido> result = repository.findByIdPedido(idPedido);
+    public ArrayList<PackageData> getUbicacion (int idPedido) throws SQLException {
+        ArrayList<PackageData> result = repository.findByIdPedido(idPedido);
 
         //System.out.println(result);
         if(!result.isEmpty()){
@@ -36,15 +32,15 @@ public class ChallengeBO {
 
     }
 
-    public ArrayList<DatosPedido> postUbicacion (DatosPedido datosPedido) throws SQLException {
+    public ArrayList<PackageData> postUbicacion (PackageData packageData) throws SQLException {
         return null;
     }
 
-    public ArrayList<DatosPedido> postPedido (DatosPedido datosPedido) throws SQLException {
+    public ArrayList<PackageData> postPedido (PackageData packageData) throws SQLException {
         return null;
     }
 
-    public ArrayList<DatosPedido> deletePedido (int idPedido) throws SQLException {
+    public ArrayList<PackageData> deletePedido (int idPedido) throws SQLException {
         return null;
     }
 

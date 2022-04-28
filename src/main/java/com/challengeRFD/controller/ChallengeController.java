@@ -2,13 +2,11 @@ package com.challengeRFD.controller;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Properties;
 
 import com.challengeRFD.api.ChallengeAPI;
 import com.challengeRFD.bo.ChallengeBO;
-import com.challengeRFD.model.DatosPedido;
-import com.challengeRFD.model.Pedido;
-import io.swagger.models.Response;
+import com.challengeRFD.model.PackageData;
+import com.challengeRFD.model.PackageAssignments;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,11 +20,11 @@ public class ChallengeController implements ChallengeAPI {
 
     @Override
     public ResponseEntity<?> getUbicacion(int idPedido) {
-        ArrayList<DatosPedido> datosPedido = new ArrayList<>();
+        ArrayList<PackageData> packageData = new ArrayList<>();
         try {
-               datosPedido = bo.getUbicacion(idPedido);
-               if (datosPedido != null) {
-                   return ResponseEntity.status(HttpStatus.OK).body(datosPedido);
+               packageData = bo.getUbicacion(idPedido);
+               if (packageData != null) {
+                   return ResponseEntity.status(HttpStatus.OK).body(packageData);
                } else {
                    return ResponseEntity.status(HttpStatus.NOT_FOUND).body("¡Ups! No hemos encontrado tu pedido.\n¿Puedes revisarlo e intentarlo de nuevo?");
                }
@@ -42,12 +40,12 @@ public class ChallengeController implements ChallengeAPI {
     }
 
     @Override
-    public ResponseEntity<?> postUbicacion(DatosPedido datosPedido) {
+    public ResponseEntity<?> postUbicacion(PackageData packageData) {
         return null;
     }
 
     @Override
-    public ResponseEntity<?> postPedido(Pedido pedido) {
+    public ResponseEntity<?> postPedido(PackageAssignments packageAssignments) {
         return null;
     }
 

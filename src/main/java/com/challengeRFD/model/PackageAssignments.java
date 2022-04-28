@@ -1,11 +1,17 @@
 package com.challengeRFD.model;
 
+import javax.persistence.*;
 
-public class Pedido {
+@Entity
+@Table(name = "packageassignments")
+public class PackageAssignments {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private final long idPedido;
     private final String idCoche;
 
-    public Pedido(long idPedido, String idCoche) {
+    public PackageAssignments(long idPedido, String idCoche) {
+
         this.idPedido = idPedido;
         this.idCoche = idCoche;
     }
