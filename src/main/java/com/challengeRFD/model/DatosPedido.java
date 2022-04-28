@@ -1,23 +1,32 @@
 package com.challengeRFD.model;
 
-import java.util.Date;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
-public class DatosCoche {
-    private final int idPedido;
-    private final String idCoche;
-    private final String ubicacion;
-    private final String latitud;
-    private final String longitud;
-    private final String timestamp;
+@Entity
+public class DatosPedido {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int idPedido;
+    private String idCoche;
+    private String ubicacion;
+    private String latitud;
+    private String longitud;
+    private String timestamp;
 
-    public DatosCoche(int idPedido, String idCoche, String ubicacion, String latitud, String longitud, String timestamp) {
+    public DatosPedido(){
+
+    }
+    /*public DatosPedido(int idPedido, String idCoche, String ubicacion, String latitud, String longitud, String timestamp) {
         this.idPedido = idPedido;
         this.idCoche = idCoche;
         this.ubicacion = ubicacion;
         this.latitud = latitud;
         this.longitud = longitud;
         this.timestamp = timestamp;
-    }
+    }*/
 
     public int getIdPedido() {
         return idPedido;
