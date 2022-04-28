@@ -7,18 +7,18 @@ import javax.persistence.*;
 public class PackageAssignments {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long idPedido;
-    private String idCoche;
+    private long idPackage;
+    private String idVehicle;
 
     public PackageAssignments(){
 
     }
 
-    public long getIdPedido() {
-        return idPedido;
+    public long getIdPackage() {
+        return idPackage;
     }
 
-    public String getIdCoche() {
-        return idCoche;
+    public String getIdVehicle() {
+        return idVehicle;
     }
 }

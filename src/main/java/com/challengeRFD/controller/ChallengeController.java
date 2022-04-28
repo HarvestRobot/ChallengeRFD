@@ -1,10 +1,10 @@
 package com.challengeRFD.controller;
 
 import java.sql.*;
-import java.util.ArrayList;
 
 import com.challengeRFD.api.ChallengeAPI;
 import com.challengeRFD.bo.ChallengeBO;
+import com.challengeRFD.database.PackageDataRepository;
 import com.challengeRFD.model.PackageData;
 import com.challengeRFD.model.PackageAssignments;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,21 +17,20 @@ public class ChallengeController implements ChallengeAPI {
 
     @Autowired
     ChallengeBO bo;
+    @Autowired
+    private PackageDataRepository repository;
 
     @Override
-    public ResponseEntity<?> getUbicacion(int idPedido) {
+    public ResponseEntity<?> getPackageData(int idPackage) {
         PackageData packageData;
         try {
-               packageData = bo.getUbicacion(idPedido);
+               packageData = bo.getPackageData(idPackage);
                if (packageData != null) {
                    return ResponseEntity.status(HttpStatus.OK).body(packageData);
                } else {
-                   return ResponseEntity.status(HttpStatus.NOT_FOUND).body("¡Ups! No hemos encontrado tu pedido.\n¿Puedes revisarlo e intentarlo de nuevo?");
+                   return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Whoops. We didn't find your package." +
+                           "\nCould you check the package id and try again?");
                }
-        } catch (SQLException sqlException){
-            sqlException.printStackTrace();
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error interno al buscar en la base de datos.\n" +
-                    "Por favor, contacte con un administrador mostrándole el siguiente mensaje: \n"+sqlException.getMessage());
         } catch (Exception genException){
             genException.printStackTrace();
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error interno desconocido.\n" +
@@ -40,17 +39,23 @@ public class ChallengeController implements ChallengeAPI {
     }
 
     @Override
-    public ResponseEntity<?> postUbicacion(PackageData packageData) {
+    public ResponseEntity<?> postPackageData(PackageData packageData) {
+        if (bo.postPackageData(packageData) != null) {
+            System.out.println("return OK");
+            return ResponseEntity.status(HttpStatus.OK).body(packageData);
+        } else {
+            System.out.println("return KO");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("No se ha podido registrar el paquete.\nDisculpe las molestias.");
+        }
+    }
+
+    @Override
+    public ResponseEntity<?> postPackage(PackageAssignments packageAssignments) {
         return null;
     }
 
     @Override
-    public ResponseEntity<?> postPedido(PackageAssignments packageAssignments) {
-        return null;
-    }
-
-    @Override
-    public ResponseEntity<?> deletePedido(String locale) {
+    public ResponseEntity<?> deletePackage(int idPackage) {
         return null;
     }
 

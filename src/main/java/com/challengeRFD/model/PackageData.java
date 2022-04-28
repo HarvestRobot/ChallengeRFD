@@ -6,52 +6,67 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.sql.Timestamp;
 
 @Entity
 @Table (name = "packagedata")
 public class PackageData {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idPedido;
-    private String idCoche;
-    private String ubicacion;
-    private String latitud;
-    private String longitud;
+    private int idPackage;
+    private String idVehicle;
+    private String location;
+    private String latitude;
+    private String longitude;
     private String timestamp;
 
-    protected PackageData(){
+    public PackageData(){
 
     }
-    /*public DatosPedido(int idPedido, String idCoche, String ubicacion, String latitud, String longitud, String timestamp) {
-        this.idPedido = idPedido;
-        this.idCoche = idCoche;
-        this.ubicacion = ubicacion;
-        this.latitud = latitud;
-        this.longitud = longitud;
+    public PackageData(int idPackage, String idVehicle, String location, String latitude, String longitude, String timestamp) {
+        this.idPackage = idPackage;
+        this.idVehicle = idVehicle;
+        this.location = location;
+        this.latitude = latitude;
+        this.longitude = longitude;
         this.timestamp = timestamp;
-    }*/
-
-    public int getIdPedido() {
-        return idPedido;
     }
 
-    public String getUbicacion() {
-        return ubicacion;
+    public int getIdPackage() {
+        return idPackage;
     }
 
-    public String getIdCoche() {
-        return idCoche;
+    public String getLocation() {
+        return location;
     }
 
-    public String getLatitud() {
-        return latitud;
+    public String getIdVehicle() {
+        return idVehicle;
     }
 
-    public String getLongitud() {
-        return longitud;
+    public String getLatitude() {
+        return latitude;
+    }
+
+    public String getLongitude() {
+        return longitude;
     }
 
     public String getTimestamp() {
         return timestamp;
+    }
+
+    public void setIdPackage(int idPackage){
+        this.idPackage = idPackage;
+    }
+
+    public String toString(){
+        return "Objeto: " +
+                "idPackage = "+getIdPackage()+", " +
+                "idVehicle = "+getIdVehicle()+", " +
+                "location = "+getLocation()+", " +
+                "latitude = "+getLatitude()+", "+
+                "longitude = "+getLongitude()+", "+
+                "timestamp = "+getTimestamp();
     }
 }
