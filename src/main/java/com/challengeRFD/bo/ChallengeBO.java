@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Properties;
-@Service
+@Service("ChallengeBO")
 public class ChallengeBO {
 
     @Autowired
@@ -23,10 +23,11 @@ public class ChallengeBO {
     }
 
     public ArrayList<DatosPedido> getUbicacion (int idPedido) throws SQLException {
-        // Find a customer by ID
-        ArrayList<DatosPedido> result = repository.findByIdPedido(1);
+        ArrayList<DatosPedido> result = repository.findByIdPedido(idPedido);
+
+        //System.out.println(result);
         if(!result.isEmpty()){
-            System.out.println("result.get(0)"+result.get(0));
+            //System.out.println("result.get(0)"+result.get(0));
             return result;
         } else {
             return null;

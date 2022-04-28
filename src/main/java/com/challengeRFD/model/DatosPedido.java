@@ -1,11 +1,14 @@
 package com.challengeRFD.model;
 
+import javax.persistence.Table;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
+@Table (name = "localizaciones")
 public class DatosPedido {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,7 +19,7 @@ public class DatosPedido {
     private String longitud;
     private String timestamp;
 
-    public DatosPedido(){
+    protected DatosPedido(){
 
     }
     /*public DatosPedido(int idPedido, String idCoche, String ubicacion, String latitud, String longitud, String timestamp) {
