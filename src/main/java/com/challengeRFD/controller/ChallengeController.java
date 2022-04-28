@@ -20,7 +20,7 @@ public class ChallengeController implements ChallengeAPI {
 
     @Override
     public ResponseEntity<?> getUbicacion(int idPedido) {
-        ArrayList<PackageData> packageData = new ArrayList<>();
+        PackageData packageData;
         try {
                packageData = bo.getUbicacion(idPedido);
                if (packageData != null) {

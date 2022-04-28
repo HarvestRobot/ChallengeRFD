@@ -7,5 +7,5 @@ import java.util.ArrayList;
 
 public interface DatosPedidoRepository extends Repository<PackageData, Integer> {
 
-    ArrayList<PackageData> findByIdPedido(int idpedido);
+    PackageData findPackageDataByIdPedidoOrderByTimestampDesc(int idpedido);
 }

@@ -18,15 +18,15 @@ public class ChallengeBO {
 
     }
 
-    public ArrayList<PackageData> getUbicacion (int idPedido) throws SQLException {
-        ArrayList<PackageData> result = repository.findByIdPedido(idPedido);
+    public PackageData getUbicacion (int idPedido) throws SQLException {
+        PackageData result = repository.findPackageDataByIdPedidoOrderByTimestampDesc(idPedido);
 
-        //System.out.println(result);
-        if(!result.isEmpty()){
-            //System.out.println("result.get(0)"+result.get(0));
-            return result;
-        } else {
+        System.out.println(result);
+        if(result == null){
+            System.out.println("null");
             return null;
+        } else {
+            return result;
         }
 
 
