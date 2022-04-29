@@ -57,7 +57,7 @@ public class ChallengeController implements ChallengeAPI {
     public ResponseEntity<?> postPackageData(PackageData packageData) {
         PackageData newPackageData = bo.postPackageData(packageData);
         if (newPackageData != null) {
-            return ResponseEntity.status(HttpStatus.OK).body(newPackageData);
+            return ResponseEntity.status(HttpStatus.CREATED).body(newPackageData);
         } else {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ErrorReturn(
                     400, "Bad request", "We couldn't register package data. Sorry about that."));
