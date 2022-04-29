@@ -10,8 +10,9 @@ import io.swagger.annotations.ApiResponses;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-
+/**
+ * API class
+ */
 public interface ChallengeAPI {
 
     @ApiOperation(value = "Gets the package data", nickname = "getPackageData", tags = {

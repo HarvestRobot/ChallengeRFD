@@ -8,6 +8,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.sql.Timestamp;
 
+/**
+ * Represents a row of the table packagedata of the DB
+ */
 @Entity
 @Table (name = "packagedata")
 public class PackageData {

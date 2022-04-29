@@ -13,12 +13,21 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * Controller for the API.
+ * This layer is between the BO and the API and takes care of handling exceptions and errors.
+ */
 @RestController
 public class ChallengeController implements ChallengeAPI {
 
     @Autowired
     ChallengeBO bo;
 
+    /**
+     * Controller for the method getPackageData of the BO
+     * @param idPackage -> the package to handle
+     * @return the status of the petition
+     */
     @Override
     public ResponseEntity<?> getPackageData(int idPackage) {
         PackageData packageData;
@@ -28,8 +37,8 @@ public class ChallengeController implements ChallengeAPI {
                 return ResponseEntity.status(HttpStatus.OK).body(packageData);
             } else {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorReturn(
-                        404, "Package not found","Whoops. We didn't find your package." +
-                        "Could you check the package id and try again?"));
+                        404, "Package not found","We didn't find your package." +
+                        "Check the package id and try again."));
             }
         } catch (Exception genException) {
             genException.printStackTrace();
@@ -38,6 +47,11 @@ public class ChallengeController implements ChallengeAPI {
         }
     }
 
+    /**
+     * Controller for the method postPackageData of the BO
+     * @param packageData -> the data to handle
+     * @return the status of the petition
+     */
     @Override
     public ResponseEntity<?> postPackageData(PackageData packageData) {
         PackageData newPackageData = bo.postPackageData(packageData);
@@ -49,6 +63,11 @@ public class ChallengeController implements ChallengeAPI {
         }
     }
 
+    /**
+     * Controller for the method postPackage of the BO
+     * @param packageAssignments -> the data to handle
+     * @return the status of the petition
+     */
     @Override
     public ResponseEntity<?> postPackage(PackageAssignments packageAssignments) {
         try {
@@ -59,20 +78,30 @@ public class ChallengeController implements ChallengeAPI {
                         400, "Bad request", "We couldn't register package data. Sorry about that."));
             }
         } catch (RuntimeException e) {
+            //Using guava Throwables because the postgres PSQLException exception cant be directly handled
             Throwable rootCause = com.google.common.base.Throwables.getRootCause(e);
             if (rootCause instanceof SQLException) {
                 if ("23505".equals(((SQLException) rootCause).getSQLState())) {
                     return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ErrorReturn(
-                            400, "Bad request: duplicated package","Error: this package is already assigned to a vehicle, please, check the package id."));
+                            400, "Bad request: duplicated package","Error: this package is already assigned to a vehicle. Please, check the package id."));
+                } else {
+                    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("SQL internal error (code " +((SQLException) rootCause).getSQLState()+"). "+
+                            "Please, contact with a system administrator showing them the next message: " + rootCause.getMessage());
                 }
+            } else {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Unhandled internal error." +
+                        "Please, contact with a system administrator showing them the next message: " + rootCause.getMessage());
             }
         }
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ErrorReturn(
-                999, "Unhandled error","Unhandled error"));
     }
 
+    /**
+     * Controller for the method deletePackage of the BO
+     * @param idPackage -> the package to handle
+     * @return the status of the petition
+     */
     @Override
-    public ResponseEntity<?> deletePackage ( int idPackage){
+    public ResponseEntity<?> deletePackage (int idPackage){
         ArrayList<PackageAssignments> packageData;
         try {
             packageData = bo.deletePackage(idPackage);
@@ -80,8 +109,8 @@ public class ChallengeController implements ChallengeAPI {
                 return ResponseEntity.status(HttpStatus.CREATED).body(packageData);
             } else {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorReturn(
-                        404, "Package not found","Whoops. We didn't find your package." +
-                        "Could you check the package id and try again?"));
+                        404, "Package not found","We didn't find your package." +
+                        "Check the package id and try again."));
             }
         } catch (Exception genException) {
             genException.printStackTrace();

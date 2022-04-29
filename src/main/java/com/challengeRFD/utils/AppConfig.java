@@ -8,6 +8,9 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalEntityManagerFactoryBean;
 
+/**
+ * Configuration for the postgres database and JPA's repositories
+ */
 @Configuration
 @EnableJpaRepositories(basePackages = {"com.challengeRFD"})
 public class AppConfig {

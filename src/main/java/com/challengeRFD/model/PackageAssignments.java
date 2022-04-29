@@ -2,6 +2,9 @@ package com.challengeRFD.model;
 
 import javax.persistence.*;
 
+/**
+ * Represents a row of the table packageassignments of the DB
+ */
 @Entity
 @Table(name = "packageassignments")
 public class PackageAssignments {

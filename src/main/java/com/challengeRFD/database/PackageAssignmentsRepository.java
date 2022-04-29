@@ -6,6 +6,10 @@ import org.springframework.data.repository.CrudRepository;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
+
+/**
+ * Implements SQL duties for the table packageassignments.
+ */
 @Transactional
 public interface PackageAssignmentsRepository extends CrudRepository<PackageAssignments, Integer> {
 

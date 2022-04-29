@@ -10,8 +10,11 @@ import org.springframework.stereotype.Service;
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Calendar;
 
+/**
+ * BusinessObject class for the controller of the API
+ * This layer communicates with the DB.
+ */
 @Service("ChallengeBO")
 public class ChallengeBO {
 
@@ -25,10 +28,21 @@ public class ChallengeBO {
 
     }
 
+    /**
+     * Gets the tracking of a package
+     * @param idPackage -> the id of the package to search
+     * @return the data of the package, corresponding to a PackageData object
+     */
     public PackageData getPackageData(int idPackage) {
         return repositoryPackageData.findFirstByIdPackageOrderByTimestampDesc(idPackage);
     }
 
+    /**
+     * Updates the tracking of a package with the new location of the vehicle
+     * adding a timestamp of the moment of the petition
+     * @param packageData -> the data of the tracking package
+     * @return the updated package data
+     */
     public PackageData postPackageData (PackageData packageData) {
         PackageData newPackageData = new PackageData(packageData.getIdPackage(),
                 packageData.getIdVehicle(),
@@ -43,11 +57,21 @@ public class ChallengeBO {
         return newPackageData;
     }
 
+    /**
+     * Inserts a new relation package->vehicle
+     * @param packageAssignments -> the package->vehicle relation
+     * @return the same relation taken by param
+     */
     public PackageAssignments postPackage (PackageAssignments packageAssignments) {
         repositoryPackageAssignments.save(packageAssignments);
         return packageAssignments;
     }
 
+    /**
+     * Deletes a relation package->vehicle ONLY from the table packageassignments
+     * @param idPackage -> the id of the package to delete
+     * @return the deleted package
+     */
     public ArrayList<PackageAssignments> deletePackage (int idPackage) {
         ArrayList<PackageAssignments> result = repositoryPackageAssignments.deleteAllByIdPackage(idPackage);
         if (result == null || result.size() == 0){
