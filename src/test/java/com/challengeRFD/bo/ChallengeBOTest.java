@@ -25,9 +25,9 @@ class ChallengeBOTest {
 
     @org.junit.jupiter.api.Test
     void getPackageDataSuccess() {
-        int idPedido = 1;
-        PackageData packageDataReturn = bo.getPackageData(idPedido);
-        assertEquals(packageDataReturn.getIdPackage(), idPedido);
+        int idPackage = 1;
+        PackageData packageDataReturn = bo.getPackageData(idPackage);
+        assertEquals(packageDataReturn.getIdPackage(), idPackage);
         assertEquals(packageDataReturn.getIdVehicle(), "A1");
         assertEquals(packageDataReturn.getLocation(), "Madrid");
         assertEquals(packageDataReturn.getLatitude(), "6.5652445");
@@ -62,15 +62,15 @@ class ChallengeBOTest {
 
     @org.junit.jupiter.api.Test
     void deletePackageSuccess() {
-        int idPedido = 1;
-        ArrayList<PackageAssignments> packageAssignmentsReturn = bo.deletePackage(idPedido);
+        int idPackage = 1;
+        ArrayList<PackageAssignments> packageAssignmentsReturn = bo.deletePackage(idPackage);
         assertNotNull(packageAssignmentsReturn);
     }
 
     @org.junit.jupiter.api.Test
     void deletePackageNotFound() {
-        int idPedido = -1;
-        ArrayList<PackageAssignments> packageAssignmentsReturn = bo.deletePackage(idPedido);
+        int idPackage = -1;
+        ArrayList<PackageAssignments> packageAssignmentsReturn = bo.deletePackage(idPackage);
         assertNull(packageAssignmentsReturn);
     }
 }
