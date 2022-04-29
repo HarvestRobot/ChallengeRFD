@@ -11,3 +11,7 @@ VISUALIZE SWAGGER
 RUN PROJECT
 1. You will need a local postgres DB to do this. 
 2. You can find the DB dump on this project, please setup the DB with it.
+
+TEST PROJECT
+1. You will need the DESKTOP APP Postman to do this. Because you will be running the project in local, Postman web won't work.
+2. You can find the Postman's collection on this project, please import it to your Postman.
