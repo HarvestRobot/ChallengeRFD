@@ -9,10 +9,12 @@ import io.swagger.annotations.ApiResponses;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+
 public interface ChallengeAPI {
 
     @ApiOperation(value = "Gets the package data", nickname = "getPackageData", tags = {
-            "packagedata" }, produces = "application/json")
+            "tracking" }, produces = "application/json")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Resource obtained successfully", response = PackageData.class),
             @ApiResponse(code = 202, message = "Accepted"),
@@ -21,13 +23,13 @@ public interface ChallengeAPI {
             @ApiResponse(code = 403, message = "Forbidden"),
             @ApiResponse(code = 404, message = "Not found"),
             @ApiResponse(code = 500, message = "Internal Server Error") })
-    @RequestMapping(value = "/packagedata", produces = {
+    @RequestMapping(value = "/tracking", produces = {
             "application/json" }, method = RequestMethod.GET)
     ResponseEntity<?> getPackageData(@ApiParam(value = "Package identification") @RequestParam("idPackage") int idPackage);
 
 
     @ApiOperation(value = "Updates a package data.", nickname = "postPackageData", tags = {
-            "packagedata" }, produces = "application/json", consumes = "application/json")
+            "tracking" }, produces = "application/json", consumes = "application/json")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Resource created successfully", response = PackageData.class),
             @ApiResponse(code = 202, message = "Accepted"),
@@ -36,7 +38,7 @@ public interface ChallengeAPI {
             @ApiResponse(code = 403, message = "Forbidden"),
             @ApiResponse(code = 404, message = "Not found"),
             @ApiResponse(code = 500, message = "Internal Server Error") })
-    @RequestMapping(value = "/packagedata", produces = {
+    @RequestMapping(value = "/tracking", produces = {
             "application/json" }, consumes = { "application/json" }, method = RequestMethod.POST)
     ResponseEntity<?> postPackageData(@RequestBody PackageData packageData);
 
@@ -55,10 +57,10 @@ public interface ChallengeAPI {
     ResponseEntity<?> postPackage(@RequestBody PackageAssignments packageAssignments);
 
 
-    @ApiOperation(value = "Deletes all data of a already delivered package.", nickname = "deletePedido", tags = {
+    @ApiOperation(value = "Deletes all data of a already delivered package.", nickname = "deletePackage", tags = {
             "package" }, produces = "application/json")
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Resource deleted successfully"),
+            @ApiResponse(code = 200, message = "Resource deleted successfully", response = PackageAssignments.class),
             @ApiResponse(code = 202, message = "Accepted"),
             @ApiResponse(code = 400, message = "Bad request or functional error"),
             @ApiResponse(code = 401, message = "Unauthorized"),
@@ -66,7 +68,7 @@ public interface ChallengeAPI {
             @ApiResponse(code = 404, message = "Not found"),
             @ApiResponse(code = 500, message = "Internal Server Error") })
     @RequestMapping(value = "/package", produces = {
-            "application/json" }, consumes = { "application/json" }, method = RequestMethod.DELETE)
+            "application/json" }, method = RequestMethod.DELETE)
     ResponseEntity<?> deletePackage(@ApiParam(value = "Package id") @RequestParam("idPackage") int idPackage);
 
 }

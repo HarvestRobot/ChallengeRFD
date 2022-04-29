@@ -1,6 +1,7 @@
 package com.challengeRFD.controller;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 import com.challengeRFD.api.ChallengeAPI;
 import com.challengeRFD.bo.ChallengeBO;
@@ -17,8 +18,6 @@ public class ChallengeController implements ChallengeAPI {
 
     @Autowired
     ChallengeBO bo;
-    @Autowired
-    private PackageDataRepository repository;
 
     @Override
     public ResponseEntity<?> getPackageData(int idPackage) {
@@ -33,30 +32,46 @@ public class ChallengeController implements ChallengeAPI {
                }
         } catch (Exception genException){
             genException.printStackTrace();
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error interno desconocido.\n" +
-                    "Por favor, contacte con un administrador mostrándole el siguiente mensaje: \n"+genException.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Unhandled internal error.\n" +
+                    "Please, contact with a system administrator showing them the next message: \n"+genException.getMessage());
         }
     }
 
     @Override
     public ResponseEntity<?> postPackageData(PackageData packageData) {
-        if (bo.postPackageData(packageData) != null) {
-            System.out.println("return OK");
-            return ResponseEntity.status(HttpStatus.OK).body(packageData);
+        PackageData newPackageData = bo.postPackageData(packageData);
+        if (newPackageData != null) {
+            return ResponseEntity.status(HttpStatus.OK).body(newPackageData);
         } else {
-            System.out.println("return KO");
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("No se ha podido registrar el paquete.\nDisculpe las molestias.");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("We couldn't register package data.\nSorry about that.");
         }
     }
 
     @Override
     public ResponseEntity<?> postPackage(PackageAssignments packageAssignments) {
-        return null;
+        if (bo.postPackage(packageAssignments) != null) {
+            return ResponseEntity.status(HttpStatus.CREATED).body(packageAssignments);
+        } else {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("We could not assign the package to a vehicle.\nSorry about that.");
+        }
     }
 
     @Override
     public ResponseEntity<?> deletePackage(int idPackage) {
-        return null;
+        ArrayList<PackageAssignments> packageData;
+        try {
+            packageData = bo.deletePackage(idPackage);
+            if (packageData != null || packageData.size() > 0) {
+                return ResponseEntity.status(HttpStatus.OK).body(packageData);
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Whoops. We didn't find your package." +
+                        "\nCould you check the package id and try again?");
+            }
+        } catch (Exception genException){
+            genException.printStackTrace();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Unhandled internal error.\n" +
+                    "Please, contact with a system administrator showing them the next message: \n"+genException.getMessage());
+        }
     }
 
 
