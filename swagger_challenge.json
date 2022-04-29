@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "description": "API para controlar la ubicación de los vehículos de una empresa de reparto, así como sus pedidos asociados.",
+    "description": "API to track the location of the vehicles of a delivery company, as well as their assigned packages.",
     "version": "1.0.0",
     "title": "ChallengeRFD",
     "contact": {
@@ -12,34 +12,34 @@
   "basePath": "/HarvestRobot/ChallengeRFD/1.0.0",
   "tags": [
     {
-      "name": "ubicacion",
-      "description": "Llamadas para obtener, insertar o actualizar la ubicación del vehículo que lleva el pedido"
+      "name": "tracking",
+      "description": "Calls to get, insert or update the location of the vehicle that carries a package"
     },
     {
-      "name": "pedidos",
-      "description": "Llamadas para añadir o borrar pedidos"
+      "name": "package",
+      "description": "Calls to assign (add) or unassign (delete) packages from a car"
     }
   ],
   "schemes": [
     "https"
   ],
   "paths": {
-    "/ubicacion": {
+    "/tracking": {
       "get": {
         "tags": [
-          "ubicacion"
+          "tracking"
         ],
-        "summary": "obtener ubicación y vehículo",
-        "description": "Obtiene los datos del vehículo que lleva el pedido",
-        "operationId": "getUbicacion",
+        "summary": "get location and vehicle",
+        "description": "Retrieves the vehicle, vehicle location, latitude and longitude of a package.",
+        "operationId": "getPackageData",
         "produces": [
           "application/json"
         ],
         "parameters": [
           {
-            "name": "idPedido",
+            "name": "idPackage",
             "in": "query",
-            "description": "el id del pedido del que se quiere obtener la ubicación",
+            "description": "the id of the package",
             "required": true,
             "type": "integer"
           }
@@ -50,141 +50,147 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/datoscoche"
+                "$ref": "#/definitions/packageData"
               }
             }
+          },
+          "400": {
+            "description": "400 bad request"
+          },
+          "404": {
+            "description": "404 not found"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "tracking"
+        ],
+        "summary": "update location",
+        "description": "updates the vehicle's location",
+        "operationId": "postPackageData",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "packageData",
+            "description": "the data of the package to update",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/packageData"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "201 item created"
+          },
+          "400": {
+            "description": "400 bad request"
+          }
+        }
+      }
+    },
+    "/package": {
+      "post": {
+        "tags": [
+          "package"
+        ],
+        "summary": "add package",
+        "description": "Assigns a new package to a vehicle",
+        "operationId": "postPackage",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "packageData",
+            "description": "the data of the package to add",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/packageAssignment"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "201 item created"
           },
           "400": {
             "description": "400 bad request"
           }
         }
       },
-      "post": {
-        "tags": [
-          "ubicacion"
-        ],
-        "summary": "actualizar ubicación",
-        "description": "Actualiza la ubicación del vehículo",
-        "operationId": "postUbicacion",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "datosPedido",
-            "description": "Los datos del pedido que se quieren actualizar",
-            "required": false,
-            "schema": {
-              "$ref": "#/definitions/datoscoche"
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "item created"
-          },
-          "400": {
-            "description": "bad request"
-          }
-        }
-      }
-    },
-    "/pedidos": {
-      "post": {
-        "tags": [
-          "pedidos"
-        ],
-        "summary": "añadir nuevo pedido",
-        "description": "Asigna un pedido nuevo a un coche",
-        "operationId": "postPedido",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "datosPedido",
-            "description": "Los datos del pedido que se quiere crear",
-            "required": false,
-            "schema": {
-              "$ref": "#/definitions/pedido"
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "item created"
-          },
-          "400": {
-            "description": "bad request"
-          }
-        }
-      },
       "delete": {
         "tags": [
-          "pedidos"
+          "package"
         ],
-        "summary": "borrar pedido",
-        "description": "Borra (o desasigna) un pedido de un coche",
-        "operationId": "deletePedido",
+        "summary": "delete package",
+        "description": "Unassigns a package from a vehicle",
+        "operationId": "deletePackage",
         "produces": [
           "application/json"
         ],
         "parameters": [
           {
-            "name": "idPedido",
+            "name": "idPackage",
             "in": "query",
-            "description": "los datos del pedido que se quiere borrar",
+            "description": "the id of the package to delete",
             "required": true,
             "type": "integer"
           }
         ],
         "responses": {
           "201": {
-            "description": "item created"
+            "description": "201 item created"
           },
           "400": {
-            "description": "bad request"
+            "description": "400 bad request"
           }
         }
       }
     }
   },
   "definitions": {
-    "datoscoche": {
+    "packageData": {
       "type": "object",
       "required": [
-        "idPedido",
-        "ubicacion"
+        "idPackage",
+        "idVehicle",
+        "latitude",
+        "location",
+        "longitude"
       ],
       "properties": {
-        "idPedido": {
-          "type": "string",
-          "format": "string",
-          "example": "164783456"
+        "idPackage": {
+          "type": "integer",
+          "format": "integer",
+          "example": 164783456
         },
-        "idCoche": {
+        "idVehicle": {
           "type": "string",
           "format": "string",
           "example": "CR2564"
         },
-        "ubicacion": {
+        "location": {
           "type": "string",
           "format": "string",
           "example": "Madrid"
         },
-        "latitud": {
+        "latitude": {
           "type": "string",
           "example": "40.48725603806988"
         },
-        "longitud": {
+        "longitude": {
           "type": "string",
           "example": "-3.6789361594249685"
         },
@@ -195,19 +201,19 @@
         }
       }
     },
-    "pedido": {
+    "packageAssignment": {
       "type": "object",
       "required": [
-        "idCoche",
-        "idPedido"
+        "idPackage",
+        "idVehicle"
       ],
       "properties": {
-        "idPedido": {
-          "type": "string",
-          "format": "string",
-          "example": "164783456"
+        "idPackage": {
+          "type": "integer",
+          "format": "integer",
+          "example": 164783456
         },
-        "idCoche": {
+        "idVehicle": {
           "type": "string",
           "format": "string",
           "example": "CR2564"
