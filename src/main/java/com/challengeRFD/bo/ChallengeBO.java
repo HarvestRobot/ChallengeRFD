@@ -52,7 +52,6 @@ public class ChallengeBO {
         );
 
         newPackageData.setTimestamp(Timestamp.valueOf(LocalDateTime.now()));
-        System.out.println("timestamp = "+newPackageData.getTimestamp());
         repositoryPackageData.save(newPackageData);
         return newPackageData;
     }

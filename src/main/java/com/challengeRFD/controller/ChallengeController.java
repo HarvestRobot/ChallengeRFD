@@ -34,6 +34,7 @@ public class ChallengeController implements ChallengeAPI {
         try {
             packageData = bo.getPackageData(idPackage);
             if (packageData != null) {
+                System.out.println(packageData);
                 return ResponseEntity.status(HttpStatus.OK).body(packageData);
             } else {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorReturn(

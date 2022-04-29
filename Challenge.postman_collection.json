@@ -1,0 +1,115 @@
+{
+	"info": {
+		"_postman_id": "bf3e7d56-3691-45e1-aabf-bcb2ebf06c40",
+		"name": "Challenge",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "getPackageData",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/packagedata?idPackage=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"packagedata"
+					],
+					"query": [
+						{
+							"key": "idPackage",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "postPackageData",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"idPackage\": \"5\",\r\n  \"idVehicle\": \"CR2564\",\r\n  \"location\": \"Madrid\",\r\n  \"latitude\": \"40.48725603806988\",\r\n  \"longitude\": \"-3.6789361594249685\",\r\n  \"timestamp\": \"2022-09-30 00:24:41.000000\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/packagedata",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"packagedata"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "postPackage",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"idPackage\": \"5\",\r\n  \"idVehicle\": \"CR2564\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/package",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"package"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deletePackage",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/package?idPackage=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"package"
+					],
+					"query": [
+						{
+							"key": "idPackage",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
