@@ -43,14 +43,14 @@ public class ChallengeBO {
         return newPackageData;
     }
 
-    public PackageAssignments postPackage (PackageAssignments packageAssignments)  {
+    public PackageAssignments postPackage (PackageAssignments packageAssignments) {
         repositoryPackageAssignments.save(packageAssignments);
         return packageAssignments;
     }
 
     public ArrayList<PackageAssignments> deletePackage (int idPackage) {
         ArrayList<PackageAssignments> result = repositoryPackageAssignments.deleteAllByIdPackage(idPackage);
-        if (result.size() == 0 || result == null){
+        if (result == null || result.size() == 0){
             return null;
         }
         return result;

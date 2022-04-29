@@ -1,4 +1,4 @@
-package com.challengeRFD.config;
+package com.challengeRFD.utils;
 
 import javax.persistence.EntityManagerFactory;
 
