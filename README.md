@@ -13,7 +13,7 @@ CONTENTS OF THE REPOSITORY
 
 PROJECT DOCUMENTATION
 
-Please, head to the Wiki here on GitHub to see more project documentation, asides the javadoc.
+Please, head to the Wiki here on GitHub to see more project documentation.
 
 --------------------------
 PROJECT SETUP
