@@ -9,6 +9,13 @@ functionalTests -> functional hand-written tests in an Excel sheet.
 src -> the code of the project
 mvnw, mvnw.cmd and pom.xml are also project files.
 
+--------------------------
+
+PROJECT DOCUMENTATION
+
+Please, head to the Wiki here on GitHub to see more project documentation, asides the javadoc.
+
+--------------------------
 PROJECT SETUP
 
 Please, read the following lines if you want to setup the project in your computer.
