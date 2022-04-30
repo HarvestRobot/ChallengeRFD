@@ -2,6 +2,7 @@
 Repository for RFD challenge.
 
 CONTENTS OF THE REPOSITORY
+
 .mvn/wrapper -> project files
 auxData -> the database dump, the Postman collection and the Swagger of the application.
 functionalTests -> functional hand-written tests in an Excel sheet.
@@ -9,6 +10,7 @@ src -> the code of the project
 mvnw, mvnw.cmd and pom.xml are also project files.
 
 PROJECT SETUP
+
 Please, read the following lines if you want to setup the project in your computer.
 
 VISUALIZE SWAGGER
