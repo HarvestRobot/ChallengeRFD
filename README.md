@@ -15,6 +15,7 @@ DATABASE SETUP
 TEST PROJECT
 1. You will need the DESKTOP APP Postman to do this. As you will be running the project in local, Postman web won't work.
 2. You can find the Postman's collection on this project inside the folder auxData. Please import it to your Postman.
+3. You can find handmade functional tests inside the folder functionalTests, and JUnit tests inside the project's code.  
 
 SETUP PROJECT
 1. This project runs on Java 16, with Maven and Spring.
