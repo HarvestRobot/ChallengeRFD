@@ -1,5 +1,22 @@
 # ChallengeRFD
-Repostitory for RFD challenge.
+Repository for RFD challenge.
+
+CONTENTS OF THE REPOSITORY
+
+1. .mvn/wrapper -> project files
+2. auxData -> the database dump, the Postman collection and the Swagger of the application.
+3. functionalTests -> functional hand-written tests in an Excel sheet.
+4. src -> the code of the project
+5. mvnw, mvnw.cmd and pom.xml are also project files.
+
+--------------------------
+
+PROJECT DOCUMENTATION
+
+Please, head to the Wiki here on GitHub to see more project documentation.
+
+--------------------------
+PROJECT SETUP
 
 Please, read the following lines if you want to setup the project in your computer.
 
